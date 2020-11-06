@@ -5,8 +5,8 @@ module Enumerable
     return to_enum(:my_each) unless block_given?
 
     arr = self
-    arr = arr.to_a if arr.class == Range
-    arr = arr.to_a if arr.class == Hash
+    arr = arr.to_a if arr.instance_of?(Range)
+    arr = arr.to_a if arr.instance_of?(Hash)
 
     size.times do |index|
       yield arr[index]
