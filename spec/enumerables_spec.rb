@@ -37,19 +37,19 @@ describe Enumerable do
     end
   end
 
-  describe '#my_any?' do 
+  describe '#my_any?' do
     it 'returns same as Ruby #any? method' do
       expect(test_arr.my_any?(0)).to eq(test_arr.any?(0))
     end
   end
 
-  describe '#my_none?' do 
+  describe '#my_none?' do
     it 'returns same as Ruby #none? method' do
       expect(test_arr.my_none?(0)).to eq(test_arr.none?(0))
     end
   end
 
-  describe '#my_count' do 
+  describe '#my_count' do
     it 'returns same as Ruby #count method' do
       expect(test_arr.my_count(7)).to eq(test_arr.count(7))
     end
