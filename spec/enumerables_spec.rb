@@ -54,4 +54,22 @@ describe Enumerable do
       expect(test_arr.my_count(7)).to eq(test_arr.count(7))
     end
   end
+
+  describe '#my_map' do
+    it 'returns same as Ruby #map method' do
+      expect(test_arr.my_map { |x| x * 2 }).to eq(test_arr.map { |x| x * 2 })
+    end
+  end
+
+  describe '#my_inject' do
+    it 'returns same as Ruby #inject method' do
+      expect(test_arr.my_inject { |sum, n| sum + n }).to eq(test_arr.inject { |sum, n| sum + n })
+    end
+  end
+
+  describe '#multiply_els' do
+    it 'returns a multiplication of array elements' do
+      expect(multiply_els(test_arr)).to eq(120)
+    end
+  end
 end
