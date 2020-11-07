@@ -157,11 +157,29 @@ describe Enumerable do
     it 'returns same as Ruby #count method' do
       expect(test_arr.my_count(7)).to eq(test_arr.count(7))
     end
+
+    context 'When no block is given' do
+      it 'Should return same as #count' do
+        expect(test_arr.my_count).to eq(test_arr.count)
+      end
+    end
+
+    context 'When block is given' do
+      it 'Should return same as #count' do
+        expect(test_arr.my_count { |x| x > 0 }).to eq(test_arr.count { |x| x > 0 })
+      end
+    end
   end
 
   describe '#my_map' do
     it 'returns same as Ruby #map method' do
       expect(test_arr.my_map { |x| x * 2 }).to eq(test_arr.map { |x| x * 2 })
+    end
+
+    context 'When no block is given' do
+      it 'Should return enumerator' do
+        expect(test_arr.my_map.inspect).to eq(test_arr.to_enum(:my_map).inspect)
+      end
     end
   end
 
@@ -169,10 +187,22 @@ describe Enumerable do
     it 'returns same as Ruby #inject method' do
       expect(test_arr.my_inject { |sum, n| sum + n }).to eq(test_arr.inject { |sum, n| sum + n })
     end
+
+    context 'When no block is given' do
+      it 'Should return same as #inject' do
+        expect(test_arr.my_inject(:+)).to eq(test_arr.inject(:+))
+      end
+    end
+
+    context 'When initial value given' do
+      it 'Should return same as #inject' do
+        expect(test_arr.my_inject(1) { |prod, n| prod * n }).to eq(test_arr.inject(1) { |prod, n| prod * n })
+      end
+    end
   end
 
   describe '#multiply_els' do
-    it 'returns a multiplication of array elements' do
+    it 'returns a multiplication of all elements' do
       expect(multiply_els(test_arr)).to eq(120)
     end
   end
