@@ -55,14 +55,15 @@ module Helper
 
   def self.block_not_given(arr, arg)
     arr = *arr
-    if arg.length == 1
+    case arg.length
+    when 1
       proc = arg[0].to_proc
       accumulator = arr.first
       (1..(arr.size - 1)).my_each do |indx|
         accumulator = proc.call(accumulator, arr[indx])
       end
       accumulator
-    elsif arg.length == 2
+    when 2
       proc = arg[1].to_proc
       accumulator = arg[0]
       arr.my_each do |ele|
