@@ -15,7 +15,7 @@ module Enumerable
   end
 
   def my_each_with_index
-    return to_enum(:my_each) unless block_given?
+    return to_enum(:my_each_with_index) unless block_given?
 
     arr = *self
     size.times do |index|
@@ -25,7 +25,7 @@ module Enumerable
   end
 
   def my_select
-    return to_enum(:my_each) unless block_given?
+    return to_enum(:my_select) unless block_given?
 
     selected = []
     my_each do |ele|
@@ -68,12 +68,12 @@ module Enumerable
     # block is not given and truthy element is found => TRUE
     my_each { |item| return false if item && !block_given? }
     # block is not given and truthy element is not found => FALSE
-    return true unless block_given?
+    return false unless block_given?
 
     my_each do |item|
-      return true unless yield(item)
+      return false unless yield(item)
     end
-    false
+    true
   end
 
   def my_count(*arg)
@@ -96,7 +96,7 @@ module Enumerable
   end
 
   def my_map(*arg, &block)
-    return to_enum(:my_each) unless block_given?
+    return to_enum(:my_map) unless block_given?
 
     # takes a proc or block, will only use proc if both are provided
     new_arr = []
