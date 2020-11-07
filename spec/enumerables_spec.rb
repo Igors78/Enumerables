@@ -14,6 +14,12 @@ describe Enumerable do
       expect(res1).to eq(res2)
     end
 
+    context 'When block is given' do
+      it 'Should return original array' do
+        expect(test_arr.my_each { |n| n + 1 }).to eq(test_arr)
+      end
+    end
+
     context 'When no block is given' do
       it 'Should return enumerator' do
         expect(test_arr.my_each.inspect).to eq(test_arr.to_enum(:my_each).inspect)
@@ -48,6 +54,12 @@ describe Enumerable do
       test_arr.my_each_with_index { |n, i| res1 << n + i }
       test_arr.each_with_index { |n, i| res2 << n + i }
       expect(res1).to eq(res2)
+    end
+
+    context 'When block is given' do
+      it 'Should return original array' do
+        expect(test_arr.my_each_with_index { |n| n + 1 }).to eq(test_arr)
+      end
     end
 
     context 'When no block is given' do
